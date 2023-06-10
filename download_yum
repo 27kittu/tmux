@@ -3,9 +3,12 @@
 # Author : cosmo
 # Script follows here:
 
+<<<<<<< HEAD
 # switch user to root
 sudo su
 
+=======
+>>>>>>> 4f5e7387f763a7f778872264d6469d4c1b548183
 # Install required packages/tools
 yum update -y
 yum install vim tmux git net-tools -y
@@ -44,6 +47,5 @@ set -g @plugin 'tmux-plugins/tmux-resurrect'
 run '/etc/tmux/plugins/tpm/tpm'
 run-shell /etc/tmux/plugins/tmux-resurrect/resurrect.tmux
 run-shell /etc/tmux/plugins/tmux-yank/yank.tmux" >>/etc/tmux.conf
-
 
 source /etc/tmux.conf
