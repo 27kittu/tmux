@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Author : cosmo
+# Script follows here:
+
+# Install vim and configure
+user_home=/home/ec2-user
+sudo yum install vim -y
+if [ $? -eq 0 ]
+then
+file=$HOME/.vimrc
+cat > $file <<eof
+colorscheme ron	
+eof
+ln -s $file $user_home
+fi
+
+source $file
+
+#-------------------
+# Install git and configure
+sudo yum install git -y
+
+if [ $? -eq 0 ]
+then
+sudo yum install tmux -y
+if [ $? -eq 0 ]
+then 
+tmux_conf=$HOME/.tmux.conf
+sudo yum install curl 
+curl -o tmux_conf https://raw.githubusercontent.com/27kittu/tmux/master/tmux_conf
+cat tmux_conf > $tmux_conf
+nohup tmux &
+tmux source-file $tmux_conf
+ln -s $tmux_conf $user_home
+fi
+fi
+
+
+
+

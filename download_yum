@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# Author : cosmo
+# Script follows here:
+
+
+
+# Install required packages/tools
+sudo yum update -y
+sudo yum install vim tmux git net-tools -y
+#sudo yum install xsel -y
+
+# Configure Vim
+echo 'syntax enable' >> /etc/vimrc
+echo 'colorscheme ron' >> /etc/vimrc
+
+source /etc/vimrc
+
+cd /etc
+# Install Tmux Plugin Manager (TPM)
+git clone https://github.com/tmux-plugins/tpm /etc/tmux/plugins/tpm
+
+tmux new -d -s test
+
+tmux show-options -g | sed 's/^/set -g /'>/etc/tmux.conf
+
+# Adding few lines of commands for tmux-plugins
+
+echo "
+
+# Installed on purpose
+set -g mouse on
+set -g @shell_mode 'vi'
+set -g @yank_selection_mouse 'clipboard' # or 'primary' or 'secondary'
+
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '/etc/tmux/plugins/tpm/tpm'
+run-shell /etc/tmux/plugins/tmux-resurrect/resurrect.tmux
+run-shell /etc/tmux/plugins/tmux-yank/yank.tmux" >>/etc/tmux.conf
+
+
+source /etc/tmux.conf
