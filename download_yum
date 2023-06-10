@@ -3,8 +3,8 @@
 # Author : cosmo
 # Script follows here:
 
-# switch user to root
-sudo su
+
+
 
 
 # Install required packages/tools
