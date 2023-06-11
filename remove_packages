@@ -3,5 +3,5 @@
 
 sudo su 
 
-sudo yum autoremove tmux vim -y
-rm -rf /etc/tmux /etc/tmux.conf /etc/vimrc
+sudo yum autoremove tmux -y
+rm -rf /etc/tmux /etc/tmux.conf 

@@ -10,9 +10,9 @@ sudo yum update -y
 sudo yum install vim tmux git net-tools -y
 
 # 'xsel' not in yum
-sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
-sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-sudo dnf upgrade
+sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms -y
+sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
+sudo dnf upgrade -y 
 sudo dnf install xsel -y
 
 # Configure Vim
@@ -24,8 +24,8 @@ source /etc/vimrc
 cd /etc
 # Install Tmux Plugin Manager (TPM)(manually)
 git clone https://github.com/tmux-plugins/tpm /etc/tmux/plugins/tpm
-git clone https://github.com/tmux-plugins/tmux-resurrect /etc/tmux/plugins
-git clone https://github.com/tmux-plugins/tmux-yank /etc/tmux/plugins
+git clone https://github.com/tmux-plugins/tmux-resurrect /etc/tmux/plugins/tmux-resurrect
+git clone https://github.com/tmux-plugins/tmux-yank /etc/tmux/plugins/tmux-yank
 
 tmux new -d -s test
 
