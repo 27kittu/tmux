@@ -3,7 +3,7 @@
 # Author : cosmo
 # Script follows here:
 
-sudo su
+
 
 # Install required packages/tools
 yum update -y
