@@ -6,8 +6,8 @@
 
 
 # Install required packages/tools
-yum update -y
-yum install vim tmux git net-tools -y
+sudo yum update -y
+sudo yum install vim tmux git net-tools -y
 #sudo yum install xsel -y
 
 # Configure Vim
