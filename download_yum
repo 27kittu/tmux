@@ -44,4 +44,4 @@ run '/etc/tmux/plugins/tpm/tpm'
 run-shell /etc/tmux/plugins/tmux-resurrect/resurrect.tmux
 run-shell /etc/tmux/plugins/tmux-yank/yank.tmux" >>/etc/tmux.conf
 
-source /etc/tmux.conf
+tmux source-file /etc/tmux.conf
