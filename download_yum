@@ -8,7 +8,12 @@
 # Install required packages/tools
 sudo yum update -y
 sudo yum install vim tmux git net-tools -y
-#sudo yum install xsel -y
+
+# 'xsel' not in yum
+sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
+sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+sudo dnf upgrade
+sudo dnf install xsel -y
 
 # Configure Vim
 echo 'syntax enable' >> /etc/vimrc
