@@ -17,8 +17,10 @@ echo 'colorscheme ron' >> /etc/vimrc
 source /etc/vimrc
 
 cd /etc
-# Install Tmux Plugin Manager (TPM)
+# Install Tmux Plugin Manager (TPM)(manually)
 git clone https://github.com/tmux-plugins/tpm /etc/tmux/plugins/tpm
+git clone https://github.com/tmux-plugins/tmux-resurrect /etc/tmux/plugins
+git clone https://github.com/tmux-plugins/tmux-yank /etc/tmux/plugins
 
 tmux new -d -s test
 
