@@ -47,6 +47,6 @@ set -g @plugin 'tmux-plugins/tmux-resurrect'
 
 run '/data/data/com.termux/files/usr/etc/tmux/plugins/tpm/tpm'
 run-shell /data/data/com.termux/files/usr/etc/tmux/plugins/tmux-resurrect/resurrect.tmux
-run-shell /data/data/com.termux/files/usr/etc/tmux/plugins/tmux-yank/yank.tmux" >>.tmux.conf
+run-shell /data/data/com.termux/files/usr/etc/tmux/plugins/tmux-yank/yank.tmux" >>/data/data/com.termux/files/usr/etc/tmux.conf
 
 tmux source-file /data/data/com.termux/files/usr/etc/tmux.conf
