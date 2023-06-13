@@ -1,12 +1,18 @@
 #!/bin/bash
 
 # Author : cosmo
-# Script follows here:
+#USAGE: 
+#- pick a file as per the compatible os and install as below
+# switch user to 'root' user
+# ./download_yum (installs all packages and configures tmux)
+# open tmux using 'tmux' and then refresh and reload tmux using
+#'prefix(ctrl+b) and I'
 
+# Script follows here:
 
 # Install required packages/tools
 apt update -y
-apt install vim tmux git net-tools -y
+apt install vim tmux -y
 
 # Configure Vim
 echo 'syntax enable' >> $HOME/.vimrc
