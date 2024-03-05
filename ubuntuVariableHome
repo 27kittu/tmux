@@ -8,42 +8,38 @@ sudo apt update -y
 sudo apt install vim tmux git net-tools xsel -y
 
 # Configure Vim
-cat > $HOME/.vimrc << eof
+cat > /etc/vim/vimrc << eof
 syntax enable
 colorscheme ron
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType groovy setlocal ts=2 sts=2 sw=2 expandtab
 eof
 
-source $HOME/.vimrc
-
 # Install Tmux Plugin Manager (TPM)
-git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
-git clone https://github.com/tmux-plugins/tmux-resurrect $HOME/.tmux/plugins/tmux-resurrect
-git clone https://github.com/tmux-plugins/tmux-yank $HOME/.tmux/plugins/tmux-yank
+git clone https://github.com/tmux-plugins/tpm $1/.tmux/plugins/tpm
 
 # Opening tmux in detatched mode
-tmux new -d -s test
+tmux new -s test -d
 
-tmux show-options -g | sed 's/^/set -g /' >$HOME/.tmux.conf
+tmux show-options -g | sed 's/^/set -g /' >$1/.tmux.conf
 
 # Adding few lines of commands for tmux-plugins
-
 echo "
 # Installed on purpose
 set -g mouse on
 set -g @shell_mode 'vi'
 set -g @yank_selection_mouse 'clipboard' # or 'primary' or 'secondary'
+set -g @continuum-restore 'on'
+set -g status-right '#{battery_status_bg} Batt: #{battery_icon} #{battery_percentage} #{battery_remain} | %a %h-%d %H:%M '
 
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
-
+set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'tmux-plugins/tmux-battery'
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
-run '$HOME/.tmux/plugins/tpm/tpm'
-run-shell $HOME/.tmux/plugins/tmux-resurrect/resurrect.tmux
-run-shell $HOME/.tmux/plugins/tmux-yank/yank.tmux">>$HOME/.tmux.conf 
+run '$1/.tmux/plugins/tpm/tpm'">>$1/.tmux.conf 
 
-tmux source-file $HOME/.tmux.conf
+tmux source-file $1/.tmux.conf

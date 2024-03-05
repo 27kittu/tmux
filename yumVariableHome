@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Author : cosmo
+# USAGE:
+#- pick a file as per the compatible os and install as below
+# switch 'root' user and give the your username as argument ie yumVariableHome /home/ansible
+# ./yumVariableHome /home/ansible (installs all packages and configures tmux)
+# open tmux using 'tmux' and then refresh and reload tmux using 
+#'prefix(ctrl+b) and I'
+
+# Script follows here:
+
+# Install required packages/tools
+sudo yum update -y
+sudo yum install vim tmux net-tools git -y
+
+# 'xsel' not in yum
+sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms -y
+sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
+sudo dnf upgrade -y 
+sudo dnf install xsel -y
+
+# Configure Vim
+cat > /etc/vim/vimrc << eof
+syntax enable
+colorscheme ron
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType groovy setlocal ts=2 sts=2 sw=2 expandtab
+eof
+
+# Install Tmux Plugin Manager (TPM)
+git clone https://github.com/tmux-plugins/tpm $1/.tmux/plugins/tpm
+
+# Opening tmux in detatched mode
+tmux new -s test -d
+
+tmux show-options -g | sed 's/^/set -g /' >$1/.tmux.conf
+#Adding few lines of commands for tmux-plugins
+echo "
+# Installed on purpose
+set -g mouse on
+set -g @shell_mode 'vi'
+set -g @yank_selection_mouse 'clipboard' # or 'primary' or 'secondary'
+set -g @continuum-restore 'on'
+set -g status-right '#{battery_status_bg} Batt: #{battery_icon} #{battery_percentage} #{battery_remain} | %a %h-%d %H:%M '
+
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'tmux-plugins/tmux-battery'
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '$1/.tmux/plugins/tpm/tpm'">>$1/.tmux.conf
+
+tmux source-file $1/.tmux.conf
