@@ -1,0 +1,5 @@
+- run the files by giving a 'home' as parameter as below
+'sudo bash ubuntuVariableHome /home/ansible'
+
+- while ssh ing to any server, ssh for X11Forwarding for 'xsel' to work
+ssh -X ansible@x.x.x.x
